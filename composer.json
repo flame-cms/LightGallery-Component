@@ -21,7 +21,7 @@
     "require":{
         "php":">=5.3.2",
         "nette/nette":"@dev",
-        "flame/framework": "@dev-master"
+        "flame/framework": "@dev"
     },
 
     "config": {
