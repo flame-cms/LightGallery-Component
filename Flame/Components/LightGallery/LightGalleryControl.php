@@ -22,6 +22,9 @@ class LightGalleryControl extends \Flame\Application\UI\Control
 	/** @var int */
 	private $maxSize = 500;
 
+	/** @var int */
+	private $imagesPerPage = 14;
+
 	/**
 	 * @param array $images
 	 */
@@ -30,6 +33,14 @@ class LightGalleryControl extends \Flame\Application\UI\Control
 		parent::__construct();
 
 		$this->images = $images;
+	}
+
+	/**
+	 * @param int $count
+	 */
+	public function setImagePerPageCount($count)
+	{
+		$this->imagesPerPage = (int) $count;
 	}
 
 	/**
@@ -50,10 +61,39 @@ class LightGalleryControl extends \Flame\Application\UI\Control
 
 	public function render()
 	{
-		$this->template->images = $this->images;
+		$images = $this->images;
+
+		/** @var $paginator \Nette\Utils\Paginator */
+		$paginator = $this['paginator']->getPaginator();
+
+		if(is_array($this->images))
+			$images = $this->getImagesPerPage($this->images, $paginator->offset);
+
+		$this->template->images = $images;
 		$this->template->thumbSize = $this->thumbSize;
 		$this->template->maxSize = $this->maxSize;
 		$this->template->setFile(__DIR__ . '/LightGalleryControl.latte')->render();
+	}
+
+	/**
+	 * @return \Flame\Addons\VisualPaginator\Paginator
+	 */
+	protected function createComponentPaginator()
+	{
+		$control =  new \Flame\Addons\VisualPaginator\Paginator();
+		$control->getPaginator()->setItemCount(count($this->images));
+		$control->getPaginator()->setItemsPerPage($this->imagesPerPage);
+		return $control;
+	}
+
+	/**
+	 * @param $posts
+	 * @param $offset
+	 * @return array
+	 */
+	protected function getImagesPerPage(array &$posts, $offset)
+	{
+		return array_slice($posts, $offset, $this->imagesPerPage);
 	}
 
 }
