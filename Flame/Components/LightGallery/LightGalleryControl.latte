@@ -15,7 +15,19 @@
 
 <script type="text/javascript">
     $(document).ready(function() {
-        $(".fancybox").fancybox();
+        $(".fancybox-thumb").fancybox({
+            prevEffect	: 'none',
+            nextEffect	: 'none',
+            helpers	: {
+                title	: {
+                    type: 'outside'
+                },
+                thumbs	: {
+                    width	: 50,
+                    height	: 50
+                }
+            }
+        });
     });
 </script>
 
@@ -24,7 +36,7 @@
 <div class="imageRow">
 	{foreach $images as $image}
 		<div class="single">
-			<a class="fancybox" href="{$basePath}{$image->file}" rel="group" title="{$image->name}">
+			<a class="fancybox-thumb" href="{$basePath}{$image->file}" rel="fancybox-thumb" title="{$image->name}">
 				<img src="{$basePath}/{$image->file|thumb:$thumbSize:$thumbSize}"  alt="{$image->description}"></a>
 		</div>
 	{/foreach}
