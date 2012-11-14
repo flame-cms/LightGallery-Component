@@ -26,16 +26,6 @@ class LightGalleryControl extends \Flame\Application\UI\Control
 	private $imagesPerPage = 14;
 
 	/**
-	 * @param array $images
-	 */
-	public function __construct($images)
-	{
-		parent::__construct();
-
-		$this->images = $images;
-	}
-
-	/**
 	 * @param $images
 	 */
 	public function setImages($images)
