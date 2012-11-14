@@ -58,7 +58,6 @@ class LightGalleryControl extends \Flame\Application\UI\Control
 
 		$this->template->images = $images;
 		$this->template->thumbSize = $this->thumbSize;
-		$this->template->maxSize = $this->maxSize;
 		$this->template->setFile(__DIR__ . '/LightGalleryControl.latte')->render();
 	}
 
