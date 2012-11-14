@@ -36,6 +36,14 @@ class LightGalleryControl extends \Flame\Application\UI\Control
 	}
 
 	/**
+	 * @param $images
+	 */
+	public function setImages($images)
+	{
+		$this->images = $images;
+	}
+
+	/**
 	 * @param int $count
 	 */
 	public function setImagePerPageCount($count)
