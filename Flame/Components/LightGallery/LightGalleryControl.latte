@@ -1,0 +1,15 @@
+<script type="text/javascript" src="{$basePath}/lightbox/js/lightbox.js"></script>
+<link href="{$basePath}/lightbox/css/lightbox.css" rel="stylesheet" />
+<link href="{$basePath}/lightbox/css/screen.css" rel="stylesheet" />
+
+{if count($images)}
+
+<div class="imageRow">
+	{foreach $images as $image}
+		<div class="single">
+			<a href="{$basePath}/{$image->file|thumb:$maxSize}" rel="lightbox[set]" title="{$image->name}">
+				<img src="{$basePath}/{$image->file|thumb:$thumbSize:$thumbSize}"  alt="{$image->description}"></a>
+		</div>
+	{/foreach}
+</div>
+{/if}
