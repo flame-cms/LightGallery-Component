@@ -1,4 +1,4 @@
-LightGallery-Component
-======================
+#LightGallery-Component
 
-Simple gallery component based on LightBox2 for Nette
+**Simple gallery component based on LightBox2 for Nette**
+
