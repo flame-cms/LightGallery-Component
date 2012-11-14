@@ -20,9 +20,6 @@ class LightGalleryControl extends \Flame\Application\UI\Control
 	private $thumbSize = 260;
 
 	/** @var int */
-	private $maxSize = 500;
-
-	/** @var int */
 	private $imagesPerPage = 14;
 
 	/**
@@ -36,25 +33,17 @@ class LightGalleryControl extends \Flame\Application\UI\Control
 	/**
 	 * @param int $count
 	 */
-	public function setImagePerPageCount($count)
+	public function setImagesCountPerPage($count)
 	{
 		$this->imagesPerPage = (int) $count;
 	}
 
 	/**
-	 * @param $size
+	 * @param int $size
 	 */
-	public function setThumbSize($size)
+	public function setThumbnailSize($size)
 	{
 		$this->thumbSize = $size;
-	}
-
-	/**
-	 * @param $size
-	 */
-	public function setMaxSize($size)
-	{
-		$this->maxSize = $size;
 	}
 
 	public function render()

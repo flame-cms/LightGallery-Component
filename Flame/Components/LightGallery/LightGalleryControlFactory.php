@@ -24,25 +24,17 @@ class LightGalleryControlFactory extends \Flame\Application\ControlFactory
 	/**
 	 * @param int $size
 	 */
-	public function setThumbSize($size)
+	public function setThumbnailSize($size)
 	{
-		$this->lightGalleryControl->setThumbSize($size);
-	}
-
-	/**
-	 * @param int $size
-	 */
-	public function setMaxSize($size)
-	{
-		$this->lightGalleryControl->setMaxSize($size);
+		$this->lightGalleryControl->setThumbnailSize($size);
 	}
 
 	/**
 	 * @param int $count
 	 */
-	public  function setImagesPerPageCount($count)
+	public  function setImagesCountPerPage($count)
 	{
-		$this->lightGalleryControl->setImagePerPageCount($count);
+		$this->lightGalleryControl->setImagesCountPerPage($count);
 	}
 	/**
 	 * @param null $data
