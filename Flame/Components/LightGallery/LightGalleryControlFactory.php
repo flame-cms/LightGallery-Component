@@ -20,8 +20,16 @@ class LightGalleryControlFactory extends \Flame\Application\ControlFactory
 	 * @param \Flame\Templating\Helpers $helpers
 	 */
 	public function __construct(\Flame\Templating\Helpers $helpers)
-	{;
+	{
 		$this->lightGalleryControl = new LightGalleryControl($helpers);
+	}
+
+	/**
+	 * @param $filePath
+	 */
+	public function setTemplateFile($filePath)
+	{
+		$this->lightGalleryControl->setTemplateFile($filePath);
 	}
 
 	/**

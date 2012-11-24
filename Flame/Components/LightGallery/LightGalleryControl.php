@@ -13,6 +13,9 @@ namespace Flame\Components\LightGallery;
 class LightGalleryControl extends \Flame\Application\UI\Control
 {
 
+	/** @var string */
+	protected  $templateFile;
+
 	/** @var array */
 	private $images;
 
@@ -33,6 +36,15 @@ class LightGalleryControl extends \Flame\Application\UI\Control
 		parent::__construct();
 
 		$this->helpers = $helpers;
+		$this->templateFile = __DIR__ . '/LightGalleryControl.latte';
+	}
+
+	/**
+	 * @param $filename
+	 */
+	public function setTemplateFile($filename)
+	{
+		$this->templateFile = (string) $filename;
 	}
 
 	/**
@@ -71,7 +83,7 @@ class LightGalleryControl extends \Flame\Application\UI\Control
 
 		$this->template->images = $images;
 		$this->template->thumbSize = $this->thumbSize;
-		$this->template->setFile(__DIR__ . '/LightGalleryControl.latte')->render();
+		$this->template->setFile($this->templateFile)->render();
 	}
 
 	/**
