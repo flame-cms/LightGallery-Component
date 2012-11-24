@@ -16,9 +16,12 @@ class LightGalleryControlFactory extends \Flame\Application\ControlFactory
 	/** @var \Flame\Components\LightGallery\LightGalleryControl */
 	private $lightGalleryControl;
 
-	public function __construct()
-	{
-		$this->lightGalleryControl = new LightGalleryControl;
+	/**
+	 * @param \Flame\Templating\Helpers $helpers
+	 */
+	public function __construct(\Flame\Templating\Helpers $helpers)
+	{;
+		$this->lightGalleryControl = new LightGalleryControl($helpers);
 	}
 
 	/**

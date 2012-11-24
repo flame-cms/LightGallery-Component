@@ -16,11 +16,24 @@ class LightGalleryControl extends \Flame\Application\UI\Control
 	/** @var array */
 	private $images;
 
+	/** @var \Flame\Templating\Helpers $helpers */
+	private $helpers;
+
 	/** @var int */
 	private $thumbSize = 260;
 
 	/** @var int */
 	private $imagesPerPage = 14;
+
+	/**
+	 * @param null $helpers
+	 */
+	public function __construct($helpers = null)
+	{
+		parent::__construct();
+
+		$this->helpers = $helpers;
+	}
 
 	/**
 	 * @param $images
@@ -59,6 +72,17 @@ class LightGalleryControl extends \Flame\Application\UI\Control
 		$this->template->images = $images;
 		$this->template->thumbSize = $this->thumbSize;
 		$this->template->setFile(__DIR__ . '/LightGalleryControl.latte')->render();
+	}
+
+	/**
+	 * @param null $class
+	 * @return \Nette\Templating\ITemplate
+	 */
+	public function createTemplate($class = null)
+	{
+		$template = parent::createTemplate($class);
+		$template->registerHelperLoader(\Nette\Callback::create($this->helpers, 'loader'));
+		return $template;
 	}
 
 	/**
