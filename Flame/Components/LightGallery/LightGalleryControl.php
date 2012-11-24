@@ -29,9 +29,9 @@ class LightGalleryControl extends \Flame\Application\UI\Control
 	private $imagesPerPage = 14;
 
 	/**
-	 * @param null $helpers
+	 * @param \Flame\Templating\Helpers $helpers
 	 */
-	public function __construct($helpers = null)
+	public function __construct(\Flame\Templating\Helpers $helpers)
 	{
 		parent::__construct();
 
