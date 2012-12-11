@@ -19,9 +19,6 @@ class LightGalleryControl extends \Flame\Application\UI\Control
 	/** @var array */
 	private $images;
 
-	/** @var \Flame\Templating\Helpers $helpers */
-	private $helpers;
-
 	/** @var int */
 	private $thumbSize = 260;
 
@@ -29,13 +26,26 @@ class LightGalleryControl extends \Flame\Application\UI\Control
 	private $imagesPerPage = 14;
 
 	/**
-	 * @param \Flame\Templating\Helpers $helpers
+	 * @var \Flame\Templating\Helpers\ThumbnailsCreator $thumbnailsCreator
 	 */
-	public function __construct(\Flame\Templating\Helpers $helpers)
+	private $thumbnailsCreator;
+
+	/**
+	 * @param \Flame\Templating\Helpers\ThumbnailsCreator $thumbnailsCreator
+	 */
+	public function injectThumbnailsCreator(\Flame\Templating\Helpers\ThumbnailsCreator $thumbnailsCreator)
+	{
+		$this->thumbnailsCreator = $thumbnailsCreator;
+	}
+
+	/**
+	 * @param \Nette\ComponentModel\IContainer $images
+	 */
+	public function __construct($images)
 	{
 		parent::__construct();
 
-		$this->helpers = $helpers;
+		$this->images = $images;
 		$this->templateFile = __DIR__ . '/LightGalleryControl.latte';
 	}
 
@@ -81,20 +91,10 @@ class LightGalleryControl extends \Flame\Application\UI\Control
 		if(is_array($this->images))
 			$images = $this->getImagesPerPage($this->images, $paginator->offset);
 
+		$this->template->registerHelper('thumb', \Nette\Callback::create($this->thumbnailsCreator, 'thumb'));
 		$this->template->images = $images;
 		$this->template->thumbSize = $this->thumbSize;
 		$this->template->setFile($this->templateFile)->render();
-	}
-
-	/**
-	 * @param null $class
-	 * @return \Nette\Templating\ITemplate
-	 */
-	public function createTemplate($class = null)
-	{
-		$template = parent::createTemplate($class);
-		$template->registerHelperLoader(\Nette\Callback::create($this->helpers, 'loader'));
-		return $template;
 	}
 
 	/**
