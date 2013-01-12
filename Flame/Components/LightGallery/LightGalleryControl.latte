@@ -37,8 +37,8 @@
 <div class="imageRow">
 	{foreach $images as $image}
 		<div class="single">
-			<a class="fancybox-thumb" href="{$basePath}{$image->file}" rel="fancybox-thumb" title="{$image->name}{if $image->description} - {/if}{$image->description}">
-				<img src="{$basePath}/{$image->file|thumb:$thumbSize:$thumbSize}"  alt="{$image->name}"></a>
+			<a class="fancybox-thumb" href="{$baseUrl}{$image->file}" rel="fancybox-thumb" title="{$image->name}{if $image->description} - {/if}{$image->description}">
+				<img src="{$baseUrl}{$image->file|thumb:$thumbSize:$thumbSize}"  alt="{$image->name}"></a>
 		</div>
 	{/foreach}
 </div>
