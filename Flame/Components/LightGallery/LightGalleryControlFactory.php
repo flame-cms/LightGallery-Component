@@ -7,23 +7,23 @@
  */
 namespace Flame\Components\LightGallery;
 
-use Flame\Addons\VisualPaginator\IPaginatorFactory;
+use Flame\CMS\Components\VisualPaginator\IPaginatorControlFactory;
 use Flame\Thumb\ThumbnailRegister;
 
 class LightGalleryControlFactory implements ILightGalleryControlFactory
 {
 
-	/** @var  ThumbnailRegister */
+	/** @var \Flame\Thumb\ThumbnailRegister  */
 	private $thumbnailRegister;
 
-	/** @var  IPaginatorFactory */
+	/** @var \Flame\CMS\Components\VisualPaginator\IPaginatorControlFactory  */
 	private $paginatorFactory;
 
 	/**
 	 * @param ThumbnailRegister $thumbnailRegister
-	 * @param IPaginatorFactory $paginatorFactory
+	 * @param IPaginatorControlFactory $paginatorFactory
 	 */
-	function __construct(ThumbnailRegister $thumbnailRegister, IPaginatorFactory $paginatorFactory)
+	function __construct(ThumbnailRegister $thumbnailRegister, IPaginatorControlFactory $paginatorFactory)
 	{
 		$this->thumbnailRegister = $thumbnailRegister;
 		$this->paginatorFactory = $paginatorFactory;

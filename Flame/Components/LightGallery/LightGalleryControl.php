@@ -10,9 +10,8 @@
 
 namespace Flame\Components\LightGallery;
 
-use Flame\Addons\VisualPaginator\IPaginatorFactory;
-use Flame\Addons\VisualPaginator\Paginator;
-use Flame\Application\UI\Control;
+use Flame\CMS\Components\VisualPaginator\IPaginatorControlFactory;
+use Nette\Application\UI\Control;
 use Flame\Components\LightGallery\Config\Dimension;
 use Flame\Components\LightGallery\Config\IDimension;
 use Flame\Thumb\ThumbnailRegister;
@@ -35,14 +34,14 @@ class LightGalleryControl extends Control
 	/** @var \Flame\Thumb\ThumbnailRegister  */
 	private $thumbnailRegister;
 
-	/** @var \Flame\Addons\VisualPaginator\IPaginatorFactory  */
+	/** @var \Flame\CMS\Components\VisualPaginator\IPaginatorControlFactory  */
 	private $paginatorFactory;
 
 	/**
 	 * @param ThumbnailRegister $thumbnailRegister
-	 * @param IPaginatorFactory $paginatorFactory
+	 * @param IPaginatorControlFactory $paginatorFactory
 	 */
-	public function __construct(ThumbnailRegister $thumbnailRegister, IPaginatorFactory $paginatorFactory)
+	public function __construct(ThumbnailRegister $thumbnailRegister, IPaginatorControlFactory $paginatorFactory)
 	{
 		parent::__construct();
 
@@ -53,7 +52,7 @@ class LightGalleryControl extends Control
 	}
 
 	/**
-	 * @param string $filename
+	 * @param $filename
 	 * @return $this
 	 */
 	public function setTemplateFile($filename)
@@ -106,7 +105,7 @@ class LightGalleryControl extends Control
 		}
 
 		if(is_array($images)) {
-			/** @var $vsPaginator Paginator */
+			/** @var $vsPaginator \Flame\CMS\Components\VisualPaginator\PaginatorControl */
 			$vsPaginator = $this['paginator'];
 			$images = $vsPaginator->applyFor($images);
 		}
@@ -118,7 +117,7 @@ class LightGalleryControl extends Control
 	}
 
 	/**
-	 * @return \Flame\Addons\VisualPaginator\Paginator
+	 * @return \Flame\CMS\Components\VisualPaginator\PaginatorControl
 	 */
 	protected function createComponentPaginator()
 	{
