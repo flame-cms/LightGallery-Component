@@ -14,9 +14,9 @@ interface ILightGalleryControlFactory
 {
 
 	/**
-	 * @param $images
+	 * @param array|\Traversable $images
 	 * @return LightGalleryControl
 	 */
-	public function create($images);
+	public function create($images = array());
 
 }

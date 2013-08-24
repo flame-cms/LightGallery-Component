@@ -1,37 +1,38 @@
 {
-    "name":"flame/lightboxgallery-component",
-    "description":"Simple gallery component based on LightBox2 for Nette",
-    "keywords":["gallery", "flame", "nette", "lightbox", "component"],
-    "homepage":"https://github.com/flame-org/LightGallery-Component",
-    "license": "BSD-2-Clause-FreeBSD",
-    
-    "support":{
-        "email":"flame@jsifalda.name",
-        "issues":"https://github.com/flame-org/LightGallery-Component/issues"
-    },
+  "name": "flame/lightboxgallery-component",
+  "description": "Simple gallery component based on LightBox2 for Nette",
+  "keywords": ["gallery", "flame", "nette", "lightbox", "component"],
+  "homepage": "https://github.com/flame-org/LightGallery-Component",
+  "license": "BSD-2-Clause-FreeBSD",
 
-    "authors":[
-        {
-            "name":"Jiří Šifalda",
-            "homepage":"http://jsifalda.name/",
-            "email":"sifalda.jiri@gmail.com"
-        }
-    ],
+  "support": {
+    "email": "flame@jsifalda.name",
+    "issues": "https://github.com/flame-org/LightGallery-Component/issues"
+  },
 
-    "require":{
-        "php":">=5.3.2",
-        "nette/nette":">=2.0.1",
-        "flame/framework": ">=5.0.0"
-    },
-
-    "config": {
-        "vendor-dir": "libs"
-    },
-
-    "autoload":{
-        "psr-0":{
-            "Flame":""
-        }
+  "authors": [
+    {
+      "name": "Jiří Šifalda",
+      "homepage": "http://jsifalda.name/",
+      "email": "sifalda.jiri@gmail.com"
     }
+  ],
+
+  "require": {
+    "php": ">=5.3.2",
+    "nette/nette": ">=2.0.1",
+    "flame/framework": ">=5.0.0",
+    "flame/thumbnail-helper": ">=2.0"
+  },
+
+  "config": {
+    "vendor-dir": "libs"
+  },
+
+  "autoload": {
+    "psr-0": {
+      "Flame": ""
+    }
+  }
 
 }

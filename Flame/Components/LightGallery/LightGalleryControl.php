@@ -10,90 +10,106 @@
 
 namespace Flame\Components\LightGallery;
 
-class LightGalleryControl extends \Flame\Application\UI\Control
+use Flame\Addons\VisualPaginator\Paginator;
+use Flame\Application\UI\Control;
+use Flame\Components\LightGallery\Config\Dimension;
+use Flame\Components\LightGallery\Config\IDimension;
+use Flame\Thumb\ThumbnailRegister;
+
+class LightGalleryControl extends Control
 {
 
 	/** @var string */
-	protected  $templateFile;
+	private $templateFile;
 
 	/** @var array */
-	private $images;
+	private $images = array();
+
+	/** @var  IDimension */
+	private $dimension;
 
 	/** @var int */
-	private $thumbSize = 260;
+	private $imagesPerPage = 10;
 
-	/** @var int */
-	private $imagesPerPage = 14;
-
-	/**
-	 * @var \Flame\Templating\Helpers\ThumbnailsCreator $thumbnailsCreator
-	 */
-	private $thumbnailsCreator;
+	/** @var \Flame\Thumb\ThumbnailRegister  */
+	private $thumbnailRegister;
 
 	/**
-	 * @param \Flame\Templating\Helpers\ThumbnailsCreator $thumbnailsCreator
+	 * @param ThumbnailRegister $thumbnailRegister
+	 * @param array $images
 	 */
-	public function injectThumbnailsCreator(\Flame\Templating\Helpers\ThumbnailsCreator $thumbnailsCreator)
-	{
-		$this->thumbnailsCreator = $thumbnailsCreator;
-	}
-
-	/**
-	 * @param \Nette\ComponentModel\IContainer $images
-	 */
-	public function __construct($images)
+	public function __construct(ThumbnailRegister $thumbnailRegister, $images = array())
 	{
 		parent::__construct();
 
-		$this->images = $images;
-		$this->templateFile = __DIR__ . '/LightGalleryControl.latte';
+		$this->setImages($images);
+		$this->dimension = new Dimension(350, 200);
+		$this->thumbnailRegister = $thumbnailRegister;
+		$this->templateFile = __DIR__ . '/templates/LightGalleryControl.latte';
 	}
 
 	/**
-	 * @param $filename
+	 * @param string $filename
+	 * @return $this
 	 */
 	public function setTemplateFile($filename)
 	{
 		$this->templateFile = (string) $filename;
+		return $this;
 	}
 
 	/**
-	 * @param $images
+	 * @param array|\Traversable $images
+	 * @return $this
 	 */
 	public function setImages($images)
 	{
+		if($images instanceof \Traversable) {
+			$images = iterator_to_array($images);
+		}
+
 		$this->images = $images;
+		return $this;
 	}
 
 	/**
-	 * @param int $count
+	 * @param $count
+	 * @return $this
 	 */
 	public function setImagesCountPerPage($count)
 	{
 		$this->imagesPerPage = (int) $count;
+		return $this;
 	}
 
 	/**
-	 * @param int $size
+	 * @param IDimension $dimension
+	 * @return $this
 	 */
-	public function setThumbnailSize($size)
+	public function setThumbDimension(IDimension $dimension)
 	{
-		$this->thumbSize = $size;
+		$this->dimension = $dimension;
+		return $this;
 	}
 
-	public function render()
+	/**
+	 * @param null $images
+	 */
+	public function render($images = null)
 	{
-		$images = $this->images;
+		if($images === null || !count($images)) {
+			$images = $this->images;
+		}
 
-		/** @var $paginator \Nette\Utils\Paginator */
-		$paginator = $this['paginator']->getPaginator();
+		if(is_array($images)) {
+			/** @var $vsPaginator Paginator */
+			$vsPaginator = $this['paginator'];
+			$images = $vsPaginator->applyFor($images);
+		}
 
-		if(is_array($this->images))
-			$images = $this->getImagesPerPage($this->images, $paginator->offset);
-
-		$this->template->registerHelper('thumb', \Nette\Callback::create($this->thumbnailsCreator, 'thumb'));
 		$this->template->images = $images;
-		$this->template->thumbSize = $this->thumbSize;
+		$this->template->width = $this->dimension->getWidth();
+		$this->template->height = $this->dimension->getHeight();
 		$this->template->setFile($this->templateFile)->render();
 	}
 
@@ -102,20 +118,19 @@ class LightGalleryControl extends \Flame\Application\UI\Control
 	 */
 	protected function createComponentPaginator()
 	{
-		$control =  new \Flame\Addons\VisualPaginator\Paginator();
-		$control->getPaginator()->setItemCount(count($this->images));
-		$control->getPaginator()->setItemsPerPage($this->imagesPerPage);
+		$control = new Paginator;
+		$control->setItemsPerPage($this->imagesPerPage);
 		return $control;
 	}
 
 	/**
-	 * @param $posts
-	 * @param $offset
-	 * @return array
+	 * @param null $class
+	 * @return \Nette\Templating\ITemplate
 	 */
-	protected function getImagesPerPage(array &$posts, $offset)
+	protected function createTemplate($class = null)
 	{
-		return array_slice($posts, $offset, $this->imagesPerPage);
+		$template = parent::createTemplate($class);
+		$this->thumbnailRegister->register($template);
+		return $template;
 	}
-
 }
