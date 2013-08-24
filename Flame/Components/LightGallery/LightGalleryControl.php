@@ -10,6 +10,7 @@
 
 namespace Flame\Components\LightGallery;
 
+use Flame\Addons\VisualPaginator\IPaginatorFactory;
 use Flame\Addons\VisualPaginator\Paginator;
 use Flame\Application\UI\Control;
 use Flame\Components\LightGallery\Config\Dimension;
@@ -34,17 +35,20 @@ class LightGalleryControl extends Control
 	/** @var \Flame\Thumb\ThumbnailRegister  */
 	private $thumbnailRegister;
 
+	/** @var \Flame\Addons\VisualPaginator\IPaginatorFactory  */
+	private $paginatorFactory;
+
 	/**
 	 * @param ThumbnailRegister $thumbnailRegister
-	 * @param array $images
+	 * @param IPaginatorFactory $paginatorFactory
 	 */
-	public function __construct(ThumbnailRegister $thumbnailRegister, $images = array())
+	public function __construct(ThumbnailRegister $thumbnailRegister, IPaginatorFactory $paginatorFactory)
 	{
 		parent::__construct();
 
-		$this->setImages($images);
 		$this->dimension = new Dimension(350, 200);
 		$this->thumbnailRegister = $thumbnailRegister;
+		$this->paginatorFactory = $paginatorFactory;
 		$this->templateFile = __DIR__ . '/templates/LightGalleryControl.latte';
 	}
 
@@ -118,9 +122,7 @@ class LightGalleryControl extends Control
 	 */
 	protected function createComponentPaginator()
 	{
-		$control = new Paginator;
-		$control->setItemsPerPage($this->imagesPerPage);
-		return $control;
+		return $this->paginatorFactory->create()->setItemsPerPage($this->imagesPerPage);
 	}
 
 	/**
