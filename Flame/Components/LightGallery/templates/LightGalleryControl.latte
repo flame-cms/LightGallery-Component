@@ -18,18 +18,16 @@
 
 {if count($images)}
 
-<div class="imageRow">
+<div class="imagesRow">
 	{foreach $images as $image}
-
-			<a class="fancybox-thumb" href="{$baseUrl}{$image['path']}" rel="fancybox-thumb"
-			   {if isset($image['name']) && isset($image['description'])}
-				title="{$image['name']} {if $image['description']} - {/if} {$image['description']}"
-					{/if}>
-				<img class="photo" src="{$baseUrl}{$image['path']|thumb:$width:$height:'exact'}"
-				     {if isset($image['name'])}alt="{$image['name']}"{/if}
-				     width="{$width}" height="{$height}">
-			</a>
-
+		<a class="fancybox-thumb" href="{$baseUrl}{$image['path']}" rel="fancybox-thumb"
+		   {if isset($image['name']) && isset($image['description'])}
+			title="{$image['name']} {if $image['description']} - {/if} {$image['description']}"
+				{/if}>
+			<img class="photo" src="{$baseUrl}{$image['path']|thumb:$width:$height:'exact'}"
+			     {if isset($image['name'])}alt="{$image['name']}"{/if}
+			     width="{$width}" height="{$height}">
+		</a>
 	{/foreach}
 </div>
 {/if}
