@@ -8,7 +8,7 @@
  * @date    11.12.12
  */
 
-namespace Flame\Components\LightGallery;
+namespace Flame\CMS\Components\LightGallery;
 
 interface ILightGalleryControlFactory
 {

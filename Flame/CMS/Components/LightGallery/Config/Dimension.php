@@ -5,7 +5,7 @@
  * @author: Jiří Šifalda <sifalda.jiri@gmail.com>
  * @date: 24.08.13
  */
-namespace Flame\Components\LightGallery\Config;
+namespace Flame\CMS\Components\LightGallery\Config;
 
 use Nette\Object;
 

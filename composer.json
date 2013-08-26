@@ -1,13 +1,13 @@
 {
-  "name": "flame/lightboxgallery-component",
+  "name": "flame-cms/lightboxgallery-component",
   "description": "Simple gallery component based on LightBox2 for Nette",
   "keywords": ["gallery", "flame", "nette", "lightbox", "component"],
-  "homepage": "https://github.com/flame-org/LightGallery-Component",
+  "homepage": "https://github.com/flame-cms/LightGallery-Component",
   "license": "BSD-2-Clause-FreeBSD",
 
   "support": {
     "email": "flame@jsifalda.name",
-    "issues": "https://github.com/flame-org/LightGallery-Component/issues"
+    "issues": "https://github.com/flame-cms/LightGallery-Component/issues"
   },
 
   "authors": [

@@ -5,7 +5,7 @@
  * @author: Jiří Šifalda <sifalda.jiri@gmail.com>
  * @date: 24.08.13
  */
-namespace Flame\Components\LightGallery;
+namespace Flame\CMS\Components\LightGallery;
 
 use Flame\CMS\Components\VisualPaginator\IPaginatorControlFactory;
 use Flame\Thumb\ThumbnailRegister;

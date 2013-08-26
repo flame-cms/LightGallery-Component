@@ -8,12 +8,12 @@
  * @date    14.11.12
  */
 
-namespace Flame\Components\LightGallery;
+namespace Flame\CMS\Components\LightGallery;
 
 use Flame\CMS\Components\VisualPaginator\IPaginatorControlFactory;
 use Nette\Application\UI\Control;
-use Flame\Components\LightGallery\Config\Dimension;
-use Flame\Components\LightGallery\Config\IDimension;
+use Flame\CMS\Components\LightGallery\Config\Dimension;
+use Flame\CMS\Components\LightGallery\Config\IDimension;
 use Flame\Thumb\ThumbnailRegister;
 
 class LightGalleryControl extends Control
