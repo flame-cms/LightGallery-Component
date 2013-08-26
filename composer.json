@@ -1,5 +1,5 @@
 {
-  "name": "flame-cms/lightboxgallery-component",
+  "name": "flame-cms/lightgallery-component",
   "description": "Simple gallery component based on LightBox2 for Nette",
   "keywords": ["gallery", "flame", "nette", "lightbox", "component"],
   "homepage": "https://github.com/flame-cms/LightGallery-Component",
